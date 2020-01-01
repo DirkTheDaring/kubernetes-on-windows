@@ -1,0 +1,7 @@
+download files
+install files
+generate config files *partially done
+generate certs
+
+--volume-plugin-dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
+--volume-plugin-dir=C:\k\libexec\kubernetes\kubelet-plugins\volume\exec\
