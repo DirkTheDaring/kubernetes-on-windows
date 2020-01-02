@@ -15,3 +15,8 @@ kubeadm token create --print-join-command
 
 Take some inspiration for vxlan
 https://github.com/DirkTheDaring/sig-windows-tools
+
+Installation reqwuirements
+if you install choco simply do a 
+
+choco install jq git
