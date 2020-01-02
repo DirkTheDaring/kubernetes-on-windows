@@ -5,3 +5,10 @@ generate certs
 
 --volume-plugin-dir=/usr/libexec/kubernetes/kubelet-plugins/volume/exec/
 --volume-plugin-dir=C:\k\libexec\kubernetes\kubelet-plugins\volume\exec\
+
+For consistency, we should use the tar.gz and not the exe.
+https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.11.0-windows-amd64.tar.gz
+
+
+should be executed 
+kubeadm token create --print-join-command
