@@ -12,3 +12,6 @@ https://github.com/coreos/flannel/releases/download/v0.11.0/flannel-v0.11.0-wind
 
 should be executed 
 kubeadm token create --print-join-command
+
+Take some inspiration for vxlan
+https://github.com/DirkTheDaring/sig-windows-tools
