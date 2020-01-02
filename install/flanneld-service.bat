@@ -1,8 +1,6 @@
 REM @ECHO OFF
 SETLOCAL ENABLEEXTENSIONS
 CALL config.bat
-REM SET IPADDRESS=%1
-SET IPADDRESS=192.168.178.13
 SET SERVICE_NAME=flanneld
 
 REM set path to nssm  (installed by chocolatey)

@@ -8,6 +8,9 @@ mklink /D c:\etc c:\k\etc
 rd c:\var
 mklink /D c:\var c:\k\var
 
+rd c:\usr
+mklink /D c:\usr c:\k
+
 
 md c:\etc\kube-flannel\
 md c:\k\etc\kubernetes

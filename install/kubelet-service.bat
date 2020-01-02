@@ -1,21 +1,18 @@
 SETLOCAL ENABLEEXTENSIONS
+CALL config.bat
 
 SET SERVICE_NAME=kubelet
 SET KUBECONFIG=C:\k\etc\kubernetes\admin.conf
 SET NODE_NAME=%COMPUTERNAME%
-SET CLUSTER_DNS=10.233.0.3
+REM SET CLUSTER_DNS=10.233.0.3
 
 nssm.exe stop    %SERVICE_NAME%
 nssm.exe remove  %SERVICE_NAME% confirm
 del c:\k\logs\%SERVICE_NAME%.log
 
-REM sleep 5
-REM del c:\ProgramData\Kubernetes\logs\kubelet\*
 REM remove --windows-service ^
 REM --logtostderr=false ^
 REM --log-dir=C:\ProgramData\Kubernetes\logs\kubelet ^
-
-
 
 SET CERT_DIR=C:\k\etc\pki
 SET CNI_BIN_DIR=C:\k\libexec\cni
@@ -23,7 +20,7 @@ SET CNI_CONF_DIR=C:\k\etc\kubernetes\cni
 
 SET LOG_DIR=C:\ProgramData\Kubernetes\logs\kubelet
 
-SET POD_INFRA_CONTAINER_IMAGE=mcr.microsoft.com/k8s/core/pause:1.2.0
+REM SET POD_INFRA_CONTAINER_IMAGE=mcr.microsoft.com/k8s/core/pause:1.2.0
 SET FEATURE_GATES=""
 
 nssm.exe install %SERVICE_NAME% "C:\k\sbin\kubelet.exe"
