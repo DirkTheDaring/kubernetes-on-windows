@@ -1,8 +1,17 @@
+@ECHO OFF
 SETLOCAL ENABLEEXTENSIONS
 CALL config.bat
 SET SERVICE_NAME=kube-proxy
-REM SET KUBECONFIG=C:\k\etc\kubernetes\config
-SET NODE_NAME=%COMPUTERNAME%
+
+FOR /F "tokens=*" %%a IN ( 'lowercase %NODE_NAME%' ) DO ( 
+  SET NODE_NAME=%%a
+) 
+
+REM awkward dos version of SOURCE_VIP=$(sourcevip) in bash
+FOR /F "tokens=*" %%a IN ( 'sourcevip.bat' ) DO ( 
+  SET SOURCE_VIP=%%a
+) 
+echo Source VIP: %SOURCE_VIP%
 
 nssm.exe stop    %SERVICE_NAME%
 REM sleep 1
@@ -29,10 +38,9 @@ nssm.exe set %SERVICE_NAME% AppParameters ^
 --proxy-mode=kernelspace ^
 --kubeconfig=%KUBECONFIG% ^
 --network-name=vxlan0 ^
---cluster-cidr=10.233.64.0/18 ^
+--cluster-cidr=%CLUSTER_CIDR% ^
 --feature-gates=WinOverlay=true ^
---source-vip=10.233.78.2
-
+--source-vip=%SOURCE_VIP%
 
 REM logrotation HANGS on service restart if stderr and stdout are the same file.
 nssm.exe set %SERVICE_NAME% AppStdout C:\k\logs\%SERVICE_NAME%-stdout.log
