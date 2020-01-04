@@ -1,6 +1,8 @@
 @ECHO OFF
 SETLOCAL EnableDelayedExpansion
 CALL config.bat
+
+md ..\downloads
 cd ..\downloads
 
 curl -LO -C - "%KUBERNETES_SOURCE_URL%"
@@ -14,6 +16,9 @@ for %%a in ("%KUBERNETES_SOURCE_URL%") do (
 )
 REM echo %FILENAME%
 tar xvzf "%FILENAME%" --strip-components=3 kubernetes/node/bin/
+
+md ..\sbin
+md ..\bin
 
 copy flanneld.exe ..\sbin
 move kubelet.exe ..\sbin
@@ -29,6 +34,7 @@ for %%a in ("%CNI_PLUGINS_URL%") do (
 REM echo %FILENAME%
 tar xvzf "%FILENAME%"
 
+md ..\libexec\cni
 move flannel.exe     ..\libexec\cni
 move win-overlay.exe ..\libexec\cni
 move win-bridge.exe  ..\libexec\cni
