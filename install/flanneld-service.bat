@@ -1,4 +1,4 @@
-REM @ECHO OFF
+@ECHO OFF
 SETLOCAL ENABLEEXTENSIONS
 CALL config.bat
 SET SERVICE_NAME=flanneld
@@ -6,6 +6,12 @@ SET SERVICE_NAME=flanneld
 REM set path to nssm  (installed by chocolatey)
 SET PATH=%PATH%;C:\ProgramData\chocolatey\lib\NSSM\tools
 REM echo %PATH%
+
+REM awkward dos version of IPADRESS=$(ipv4) in bash
+FOR /F "tokens=*" %%a IN ( 'ipv4.bat' ) DO ( 
+  SET IPADDRESS=%%a
+) 
+echo IP Address: %IPADDRESS%
 
 nssm.exe stop   %SERVICE_NAME%
 nssm.exe remove %SERVICE_NAME% confirm
@@ -19,7 +25,7 @@ nssm.exe set %SERVICE_NAME% DisplayName %SERVICE_NAME%
 nssm.exe set %SERVICE_NAME% ObjectName LocalSystem
 nssm.exe set %SERVICE_NAME% Start SERVICE_AUTO_START
 nssm.exe set %SERVICE_NAME% Type SERVICE_WIN32_OWN_PROCESS
-nssm.exe set %SERVICE_NAME% AppEnvironmentExtra NODE_NAME=qemu-pc
+nssm.exe set %SERVICE_NAME% AppEnvironmentExtra NODE_NAME=%NODE_NAME%
 nssm.exe set %SERVICE_NAME% AppParameters ^
 -kubeconfig-file="%KUBECONFIG%" ^
 -iface=%IPADDRESS% ^
