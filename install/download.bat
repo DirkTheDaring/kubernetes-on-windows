@@ -8,6 +8,7 @@ cd ..\downloads
 curl -LO -C - "%KUBERNETES_SOURCE_URL%"
 curl -LO -C - "%CNI_SOURCE_URL0%"
 curl -LO -C - "%CNI_PLUGINS_URL%"
+curl -LO -C - "%HNS_URL%"
 
 REM poor mans "basename $KUBERNETES_SOURCE_URL"
 for %%a in ("%KUBERNETES_SOURCE_URL%") do (
