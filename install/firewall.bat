@@ -1,12 +1,8 @@
 @ECHO OFF
 SETLOCAL 
 
-REM Get Filename of current bat file
-SET BATFILENAME=%~F0
+:: Use absolute path and Replace .bat with .ps1 extension
+:: %~DP0 Absolute path to script directory
+:: %~N0  name of script with out extension (e.g. bat is cut off)
 
-REM cut off .bat extension
-SET PREFIX=%BATFILENAME:~0,-4%
-REM create script name with extension .ps1
-SET SCRIPTNAME=%PREFIX%.ps1
-
-powershell -ExecutionPolicy Bypass %SCRIPTNAME% %*
+powershell -ExecutionPolicy Bypass "%~DP0%~N0.ps1"
