@@ -2,6 +2,9 @@
 SETLOCAL ENABLEDELAYEDEXPANSION
 CALL config.bat
 
+FOR /F "tokens=*" %%a IN ( 'lowercase %NODE_NAME%' ) DO (
+  SET NODE_NAME=%%a
+)
 SET SERVICE_NAME=kubelet
 nssm.exe stop    %SERVICE_NAME%
 nssm.exe remove  %SERVICE_NAME% confirm
