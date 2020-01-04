@@ -3,8 +3,10 @@ CALL config.bat
 
 SET SERVICE_NAME=kubelet
 SET KUBECONFIG=C:\k\etc\kubernetes\admin.conf
-SET NODE_NAME=%COMPUTERNAME%
-REM SET CLUSTER_DNS=10.233.0.3
+
+FOR /F "tokens=*" %%a IN ( 'lowercase %NODE_NAME%' ) DO (
+  SET NODE_NAME=%%a
+)
 
 nssm.exe stop    %SERVICE_NAME%
 nssm.exe remove  %SERVICE_NAME% confirm

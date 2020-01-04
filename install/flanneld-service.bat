@@ -3,6 +3,10 @@ SETLOCAL ENABLEEXTENSIONS
 CALL config.bat
 SET SERVICE_NAME=flanneld
 
+FOR /F "tokens=*" %%a IN ( 'lowercase %NODE_NAME%' ) DO (
+  SET NODE_NAME=%%a
+)
+
 REM set path to nssm  (installed by chocolatey)
 SET PATH=%PATH%;C:\ProgramData\chocolatey\lib\NSSM\tools
 REM echo %PATH%
